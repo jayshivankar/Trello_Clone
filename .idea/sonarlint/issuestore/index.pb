@@ -9,3 +9,5 @@ l
 <app/src/main/java/com/example/trello_clone/SignUpActivity.kt,b/8/b8860f507e33b0813e27824d992514ff192629df
 D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
+l
+<app/src/main/java/com/example/trello_clone/SignInActivity.kt,f/d/fdb3f0f3391729873f33617cda79d65813b8bba6

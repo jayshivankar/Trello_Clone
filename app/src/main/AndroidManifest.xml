@@ -13,20 +13,23 @@
         android:theme="@style/Theme.Trello_clone"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
-            android:screenOrientation = "portrait"
-            android:theme="@style/Theme.Trello_clone"
+            android:name=".SignInActivity"
             android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello_clone" />
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/Theme.Trello_clone"
-            android:screenOrientation = "portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello_clone" />
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.Trello_clone"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello_clone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,9 +38,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.Trello_clone"
-            android:screenOrientation = "portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Trello_clone" />
     </application>
 
 </manifest>
