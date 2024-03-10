@@ -1,12 +1,14 @@
-package com.example.trello_clone
+package activites
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
+import com.example.trello_clone.R
+import com.projemanag.activities.BaseActivity
 
-class IntroActivity : AppCompatActivity() {
+class IntroActivity : BaseActivity() {
     private lateinit var btn_sign_up_intro: Button
     private lateinit var btn_sign_in_intro: Button
 
