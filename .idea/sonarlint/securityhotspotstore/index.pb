@@ -1,16 +1,8 @@
 
-l
-<app/src/main/java/com/example/trello_clone/SplashActivity.kt,1/e/1e7fa5ecdbd9837e1109f432ff0f6c2aebac7fdc
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
-k
-;app/src/main/java/com/example/trello_clone/IntroActivity.kt,2/d/2d14b7d6ccab82c4e96a0503158142c0af64917b
-l
-<app/src/main/java/com/example/trello_clone/SignUpActivity.kt,b/8/b8860f507e33b0813e27824d992514ff192629df
 D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
-l
-<app/src/main/java/com/example/trello_clone/SignInActivity.kt,f/d/fdb3f0f3391729873f33617cda79d65813b8bba6
 @
 build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d
 \
@@ -25,8 +17,6 @@ l
 -app/src/main/java/activites/SignInActivity.kt,4/1/413f9c871b0d57d9f8e1efa19717643f50ea6d6e
 ]
 -app/src/main/java/activites/SignUpActivity.kt,9/1/91af7e34c1d8294bfd0067d1754b966b9f569f8a
-L
-app/google-services (1).json,0/c/0cc598359b8595e4f12cc23247b9cbe8457068b6
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 A
@@ -37,3 +27,5 @@ X
 local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
+H
+app/google-services.json,f/d/fd8d34b142d02ec743a8efefefd2c097961666e9
