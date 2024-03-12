@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
+
 import com.example.trello_clone.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.projemanag.activities.BaseActivity
+import models.User
 
 class SignUpActivity : BaseActivity() {
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -24,6 +26,14 @@ class SignUpActivity : BaseActivity() {
 
         setupActionBar()
 
+    }
+    fun userRegisteredSuccess() {
+        // Hide the progress dialog
+        hideProgressDialog()
+        // Show the success message and finish the sign up activity
+        showErrorSnackBar("You are registered successfully. Your user ID is ${FirebaseAuth.getInstance().currentUser!!.uid}")
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 
     private fun setupActionBar() {
@@ -42,7 +52,7 @@ class SignUpActivity : BaseActivity() {
         val password: String =
             findViewById<EditText>(R.id.et_password).text.toString().trim { it <= ' ' }
 
-        // Assuming this code is inside an Activity or Fragment
+
 
         // Function to handle user registration
         fun registerUser(name: String, email: String, password: String) {
@@ -61,6 +71,8 @@ class SignUpActivity : BaseActivity() {
                             // Registration successful
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             val registeredEmail = firebaseUser.email!!
+                            val user = User(firebaseUser.uid, name, registeredEmail)
+                            firestoreclass.registerUser(this@SignUpActivity, user)
                             showErrorSnackBar("You are registered successfully. Your user ID is ${firebaseUser.uid}")
 
                             // Sign out the user and finish the activity

@@ -1,9 +1,7 @@
 
-Pkotlin:S1144'"1Remove this unused private "registerUser" method.(– ‹ë8³Ó‰ùâ1
-Xkotlin:S1481?"4Remove this unused "registeredEmail" local variable.(ø×õäşÿÿÿÿ8¸Ó‰ùâ1
-Qkotlin:S1481*"-Remove this unused "password" local variable.(ÁŸ´£ÿÿÿÿÿ8¸Ó‰ùâ1
-Nkotlin:S1481)"*Remove this unused "email" local variable.(ç±ò¤úÿÿÿÿ8¸Ó‰ùâ1
-Mkotlin:S1481(")Remove this unused "name" local variable.(ğœ€÷ÿÿÿÿÿ8¹Ó‰ùâ1
-8kotlin:S1128"Remove this unused import.(‰¿Ë8»Ó‰ùâ1
-Bkotlin:S1874"#Deprecated code should not be used.(’©Ê8½Ó‰ùâ1
-Gkotlin:S1874"#Deprecated code should not be used.(øÒÁûÿÿÿÿ8½Ó‰ùâ1
+Qkotlin:S14814"-Remove this unused "password" local variable.(ÁŸ´£ÿÿÿÿÿ8“«Ó¢ã1
+Nkotlin:S14813"*Remove this unused "email" local variable.(ç±ò¤úÿÿÿÿ8”«Ó¢ã1
+Mkotlin:S14812")Remove this unused "name" local variable.(ğœ€÷ÿÿÿÿÿ8”«Ó¢ã1
+8kotlin:S1128"Remove this unused import.(‰¿Ë8–«Ó¢ã1
+Bkotlin:S1874"#Deprecated code should not be used.(’©Ê8˜«Ó¢ã1
+Gkotlin:S1874"#Deprecated code should not be used.(øÒÁûÿÿÿÿ8˜«Ó¢ã1
