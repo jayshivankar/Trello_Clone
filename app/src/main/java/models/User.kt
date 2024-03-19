@@ -20,8 +20,7 @@ data class User(
         parcel.readString()!!,
         parcel.readLong(),
         parcel.readString()!!
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int)  = with(parcel){
         writeString(id)

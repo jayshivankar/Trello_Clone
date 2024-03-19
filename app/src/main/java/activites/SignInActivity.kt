@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.trello_clone.R
 import com.google.firebase.auth.FirebaseAuth
 import com.projemanag.activities.BaseActivity
+import models.User
 
 class SignInActivity : BaseActivity() {
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -34,6 +35,16 @@ class SignInActivity : BaseActivity() {
         }
         setupActionBar()
     }
+
+    fun signInSuccess(user : User){
+        hideProgressDialog()
+        startActivity(Intent(this,MainActivity::class.java))
+        finish()
+    }
+
+
+
+
     private fun setupActionBar(){
         setSupportActionBar(findViewById(R.id.toolbar_sign_in_activity))
 

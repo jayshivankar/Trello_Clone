@@ -8,7 +8,7 @@ import com.google.firebase.firestore.SetOptions
 import models.User
 import utils.Constants
 
-class firestoreclass {
+    class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
 
     fun registerUser(activity : SignUpActivity ,userInfo :User){
@@ -20,8 +20,23 @@ class firestoreclass {
                 Log.e(activity.javaClass.simpleName, "Error writing document", e)
             }
 
+
     }
-    fun getCurrentUserID(): String {
+
+        fun signInUser(activity: SignUpActivity) {
+            mFireStore.collection(Constants.USERS).document(getCurrentUserID()).get()
+                .addOnSuccessListener { document ->
+                    Log.d("TAG", "DocumentSnapshot data: ${document.data}")
+                    val loggedInUser = document.toObject(User::class.java)
+                    if(loggedInUser ! = null)
+                    activity.signInSuccess(loggedInUser)
+                }
+                .addOnFailureListener { e ->
+                    Log.e("TAG", "Error adding document", e)
+                }
+        }
+
+        private fun getCurrentUserID(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
         var currentUserID = ""
         if (currentUser != null) {

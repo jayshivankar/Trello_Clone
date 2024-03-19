@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
-
 import com.example.trello_clone.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import firebase.FireStoreClass
+import com.google.firebase.firestore.FirebaseFirestore
 import com.projemanag.activities.BaseActivity
 import models.User
+
+
+
 
 class SignUpActivity : BaseActivity() {
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -27,6 +31,7 @@ class SignUpActivity : BaseActivity() {
         setupActionBar()
 
     }
+
     fun userRegisteredSuccess() {
         // Hide the progress dialog
         hideProgressDialog()
@@ -38,77 +43,67 @@ class SignUpActivity : BaseActivity() {
 
     private fun setupActionBar() {
         setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_black_color_back_24)
         }
         toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
-    private fun registerUser() {
-        val name: String = findViewById<EditText>(R.id.et_name).text.toString().trim { it <= ' ' }
-        val email: String = findViewById<EditText>(R.id.et_email).text.toString().trim { it <= ' ' }
-        val password: String =
-            findViewById<EditText>(R.id.et_password).text.toString().trim { it <= ' ' }
 
 
+        private fun registerUser() {
+        val name: String = findViewById<EditText>(R.id.et_name).text.toString().trim()
+        val email: String = findViewById<EditText>(R.id.et_email).text.toString().trim()
+        val password: String = findViewById<EditText>(R.id.et_password).text.toString().trim()
 
-        // Function to handle user registration
-        fun registerUser(name: String, email: String, password: String) {
-            if (validateForm(name, email, password)) {
-                // Show progress dialog
-                showProgressDialog(getString(R.string.please_wait))
+        if (validateForm(name, email, password)) {
+            // Show progress dialog
+            showProgressDialog(getString(R.string.please_wait))
 
-                // Create user with email and password
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        // Hide progress dialog
-                        hideProgressDialog()
+            // Create user with email and password
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    // Hide progress dialog
+                    hideProgressDialog()
 
-                        // Handle registration result
-                        if (task.isSuccessful) {
-                            // Registration successful
-                            val firebaseUser: FirebaseUser = task.result!!.user!!
-                            val registeredEmail = firebaseUser.email!!
-                            val user = User(firebaseUser.uid, name, registeredEmail)
-                            firestoreclass.registerUser(this@SignUpActivity, user)
-                            showErrorSnackBar("You are registered successfully. Your user ID is ${firebaseUser.uid}")
+                    // Handle registration result
+                    if (task.isSuccessful) {
+                        // Registration successful
+                        val firebaseUser: FirebaseUser  = task.result!!.user!!
+                        val registeredEmail = firebaseUser.email!!
+                        val user = User(firebaseUser.uid, name, registeredEmail)
+                        FireStoreClass().registerUser(this, user)
+
+                        showErrorSnackBar("You are registered successfully. Your user ID is ${firebaseUser.uid}")
 
                             // Sign out the user and finish the activity
                             FirebaseAuth.getInstance().signOut()
                             finish()
-                        } else {
-                            // Registration failed, show error message
-                            showErrorSnackBar(task.exception?.message ?: "Registration failed.")
-                        }
+
+                    } else {
+                        // Registration failed, show error message
+                        showErrorSnackBar(task.exception?.message ?: "Registration failed.")
                     }
-            }
+                }
         }
     }
 
-
-        private fun validateForm(name: String, email: String, password: String): Boolean {
-            return when {
-                name.isEmpty() -> {
-                    showErrorSnackBar("Please enter a name")
-                    false
-                }
-
-                email.isEmpty() -> {
-                    showErrorSnackBar("Please enter an email")
-                    false
-                }
-
-                password.isEmpty() -> {
-                    showErrorSnackBar("Please enter a password")
-                    false
-                }
-
-                else -> {
-                    true
-                }
+    private fun validateForm(name: String, email: String, password: String): Boolean {
+        return when {
+            name.isEmpty() -> {
+                showErrorSnackBar("Please enter a name")
+                false
             }
-
+            email.isEmpty() -> {
+                showErrorSnackBar("Please enter an email")
+                false
+            }
+            password.isEmpty() -> {
+                showErrorSnackBar("Please enter a password")
+                false
+            }
+            else -> true
         }
     }
+}
