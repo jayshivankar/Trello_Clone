@@ -45,7 +45,7 @@ open class BaseActivity : AppCompatActivity() {
         mProgressDialog.dismiss()
     }
 
-    fun getCurrentUserID(): String {
+    open fun getCurrentUserID(): String {
         return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
@@ -77,4 +77,6 @@ open class BaseActivity : AppCompatActivity() {
         )
         snackBar.show()
     }
+
+
 }

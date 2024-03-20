@@ -42,9 +42,6 @@ class SignInActivity : BaseActivity() {
         finish()
     }
 
-
-
-
     private fun setupActionBar(){
         setSupportActionBar(findViewById(R.id.toolbar_sign_in_activity))
 

@@ -33,5 +33,5 @@ P
  app/src/main/java/models/User.kt,5/1/51490590e4b2d515eb3cbda524e5dee41fb2b2ce
 T
 $app/src/main/java/utils/Constants.kt,b/e/be3da8c5cf147c3086327872fe81f8ba496b3b4a
-\
-,app/src/test/java/firebase/FireStoreClass.kt,7/3/732912bc1867760c4ac063100e60cd8572b3b461
+]
+-app/src/main/java/activites/FireStoreClass.kt,a/7/a77413a9023f5612eef84e575631524745d57937

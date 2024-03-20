@@ -1,14 +1,11 @@
 package activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
 import com.example.trello_clone.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import firebase.FireStoreClass
-import com.google.firebase.firestore.FirebaseFirestore
 import com.projemanag.activities.BaseActivity
 import models.User
 
