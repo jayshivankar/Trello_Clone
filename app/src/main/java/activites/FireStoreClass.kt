@@ -30,7 +30,7 @@ import utils.Constants
                     Log.d("TAG", "DocumentSnapshot data: ${document.data}")
                     val loggedInUser = document.toObject(User::class.java)
                     if (loggedInUser != null) {
-                       activity.signInSuccess(loggedInUser)
+//                       activity.signInSuccess(loggedInUser)
                     }
                 }
                 .addOnFailureListener { e ->
