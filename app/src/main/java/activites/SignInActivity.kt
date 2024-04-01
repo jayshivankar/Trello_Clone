@@ -36,7 +36,7 @@ class SignInActivity : BaseActivity() {
         setupActionBar()
     }
 
-    fun signInSuccess(user : User){
+     fun SignInSuccess(user : User){
         hideProgressDialog()
         startActivity(Intent(this,MainActivity::class.java))
         finish()
@@ -57,6 +57,7 @@ class SignInActivity : BaseActivity() {
         val email: String = findViewById<EditText>(R.id.et_email_signin).text.toString().trim { it <= ' ' }
         val password: String = findViewById<EditText>(R.id.et_password_signin).text.toString().trim { it <= ' ' }
         if(validateForm(email, password)) {
+            showProgressDialog(resources.getString(R.string.please_wait))
             showProgressDialog(resources.getString(R.string.please_wait))
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
