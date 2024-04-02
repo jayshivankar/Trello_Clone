@@ -81,6 +81,7 @@ class SignUpActivity : BaseActivity() {
                     } else {
                         // Registration failed, show error message
                         showErrorSnackBar(task.exception?.message ?: "Registration failed.")
+
                     }
                 }
         }

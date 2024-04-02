@@ -1,11 +1,11 @@
 package activites
 
+import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import models.User
-import activites.SignInActivity
 import com.projemanag.activities.BaseActivity
 
 import utils.Constants
@@ -24,16 +24,32 @@ import utils.Constants
 
 
     }
-        fun signInUser(activity: SignUpActivity) {
+        fun signInUser(activity: Activity) {
             mFireStore.collection(Constants.USERS).document(getCurrentUserID()).get()
                 .addOnSuccessListener { document ->
                     Log.d("TAG", "DocumentSnapshot data: ${document.data}")
-                    val loggedInUser = document.toObject(User::class.java)
-                    if (loggedInUser != null) {
-                     activites.SignInActivity().SignInSuccess(loggedInUser)
+                    val loggedInUser = document.toObject(User::class.java)!!
+                    when (activity) {
+                        is SignInActivity -> {
+                            activity.SignInSuccess(loggedInUser)
+                        }
+                        is MainActivity -> {
+                            activity.updateNavigationUserDetails(loggedInUser)
+                        }
                     }
                 }
-                .addOnFailureListener { e ->
+                .addOnFailureListener {
+                    e ->
+                    when (activity) {
+                        is SignInActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                        is MainActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                    }
+
+
                     Log.e("TAG", "Error adding document", e)
                 }
         }
