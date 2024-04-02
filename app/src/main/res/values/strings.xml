@@ -20,8 +20,12 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name = "nav_my_profile">My Profile</string>
-    <string name = "nav_sign_out">Sign Out</string>
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_sign_out">Sign Out</string>
+
+    <string name = "mobile">Mobile</string>
+    <string name = "update">Update</string>
+    <string name = "my_profile">My Profile</string>
 
 
 </resources>
