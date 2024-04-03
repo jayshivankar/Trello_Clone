@@ -43,10 +43,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             drawerLayout.openDrawer(GravityCompat.START)
-
-
         }
-
     }
 
     override fun onBackPressed() {

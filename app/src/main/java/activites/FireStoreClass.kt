@@ -2,6 +2,7 @@ package activites
 
 import android.app.Activity
 import android.util.Log
+import com.example.trello_clone.databinding.ActivityMyProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -24,7 +25,7 @@ import utils.Constants
 
 
     }
-        fun signInUser(activity: Activity) {
+        fun loadUserData(activity: Activity) {
             mFireStore.collection(Constants.USERS).document(getCurrentUserID()).get()
                 .addOnSuccessListener { document ->
                     Log.d("TAG", "DocumentSnapshot data: ${document.data}")
@@ -35,6 +36,9 @@ import utils.Constants
                         }
                         is MainActivity -> {
                             activity.updateNavigationUserDetails(loggedInUser)
+                        }
+                        is my_profile -> {
+                            activity.setUserDataInUI(loggedInUser)
                         }
                     }
                 }
@@ -47,6 +51,7 @@ import utils.Constants
                         is MainActivity -> {
                             activity.hideProgressDialog()
                         }
+
                     }
 
 

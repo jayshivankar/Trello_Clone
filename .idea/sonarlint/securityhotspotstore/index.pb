@@ -35,9 +35,5 @@ T
 $app/src/main/java/utils/Constants.kt,b/e/be3da8c5cf147c3086327872fe81f8ba496b3b4a
 ]
 -app/src/main/java/activites/FireStoreClass.kt,a/7/a77413a9023f5612eef84e575631524745d57937
-a
-1app/src/main/java/activites/tool_main_activity.kt,c/b/cbcbc4f513e375fd115effaad8610c7d2b1c3324
-d
-4app/src/main/java/activites/toolbar_main_activity.kt,6/8/68d49afe96ab2a54a573383fa7ba102d49b57ee8
 Y
 )app/src/main/java/activites/my_profile.kt,6/1/616665a0f7744ae023ef3a956ec259ad16d706b6
