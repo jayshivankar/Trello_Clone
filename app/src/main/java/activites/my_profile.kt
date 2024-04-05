@@ -1,10 +1,15 @@
 package activites
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,6 +23,7 @@ class my_profile : BaseActivity() {
         private const val READ_STORAGE_PERMISSION_CODE = 1
         private const val PICK_IMAGE_REQUEST_CODE = 2
     }
+    private var mSelectedImageFileUri: Uri? = null
     private lateinit var profile_image: ImageView
     private lateinit var et_name: EditText
     private lateinit var et_email: EditText
@@ -37,6 +43,7 @@ class my_profile : BaseActivity() {
 
         profile_image.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                showImageChooser()
             } else {
                 ActivityCompat.requestPermissions(
                     this,
@@ -45,9 +52,50 @@ class my_profile : BaseActivity() {
                 )
             }
         }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == READ_STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showImageChooser()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Oops you denied the permission for storage.You can change it in settings",
+                    Toast.LENGTH_LONG
+                ).show( )
+            }
+        }
+    }
+    private fun showImageChooser(){
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK
+            && requestCode == PICK_IMAGE_REQUEST_CODE
+            && data!!.data != null){
+            mSelectedImageFileUri = data.data
+            try {
+                Glide
+                    .with(this@my_profile)
+                    .load(mSelectedImageFileUri)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_user_place_holder)
+                    .into(profile_image)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
 
     }
+
 
 
          private fun setupActionBar(){
@@ -64,6 +112,7 @@ class my_profile : BaseActivity() {
 
     }
     fun setUserDataInUI(user : User){
+
         Glide
             .with(this@my_profile)
             .load(user.image)
