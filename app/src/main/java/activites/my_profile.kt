@@ -23,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.projemanag.activities.BaseActivity
 import models.User
+import utils.Constants
 
 class my_profile : BaseActivity() {
     companion object{
@@ -33,6 +34,7 @@ class my_profile : BaseActivity() {
     private var mProfileImageURL: String = ""
 
     private lateinit var profile_image: ImageView
+    private lateinit var mUserDetails:User
     private lateinit var btn_update: Button
     private lateinit var et_name: EditText
     private lateinit var et_email: EditText
@@ -131,6 +133,7 @@ class my_profile : BaseActivity() {
 
     }
     fun setUserDataInUI(user : User){
+        mUserDetails = user
 
         Glide
             .with(this@my_profile)
@@ -144,6 +147,19 @@ class my_profile : BaseActivity() {
         if(user.mobile != 0L){
             et_mobile.setText(user.mobile.toString())
         }
+    }
+    private fun updateUserProfileData(){
+        val userHashMap =HashMap<String,Any>()
+        if (mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image){
+            userHashMap[Constants.IMAGE] = mProfileImageURL
+        }
+        if(et_name.text.toString() != mUserDetails.name){
+            userHashMap[Constants.NAME] = et_name.text.toString()
+        }
+        if (et_mobile.text.toString() != mUserDetails.mobile.toString()){
+            userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
+        }
+        FireStoreClass().updateUserProfileData(this,userHashMap)
     }
      private fun uploadUserImage() {
          showProgressDialog(resources.getString(R.string.please_wait))
@@ -163,6 +179,7 @@ class my_profile : BaseActivity() {
                  taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
                      Log.e("Downloadable Image URL", uri.toString())
                      mProfileImageURL = uri.toString()
+                     updateUserProfileData()
 
                  }
              }.addOnFailureListener{
@@ -174,6 +191,11 @@ class my_profile : BaseActivity() {
      }
 
     private fun getFileExtension(uri : Uri?):String?{
-        return MimeTypeMap.getSingleton().getExtensionFromMimeType(contentResolver.getType(uri!!))
+        return MimeTypeMap.getSingleton()
+            .getExtensionFromMimeType(contentResolver.getType(uri!!))
+    }
+    fun profileUpdateSuccess(){
+        hideProgressDialog()
+        finish()
     }
 }

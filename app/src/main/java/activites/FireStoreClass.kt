@@ -2,6 +2,7 @@ package activites
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.example.trello_clone.databinding.ActivityMyProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,6 +26,24 @@ import utils.Constants
 
 
     }
+        fun updateUserProfileData(activity:my_profile,userHashMap:HashMap<String,Any>){
+            mFireStore.collection(Constants.USERS)
+                .document(getCurrentUserID())
+                .update(userHashMap)
+                   .addOnSuccessListener {
+                        Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
+                        Toast.makeText(activity, "Profile Data updated successfully!", Toast.LENGTH_SHORT).show()
+                        activity.profileUpdateSuccess()
+                    }.addOnFailureListener {
+                        e ->
+                        activity.hideProgressDialog()
+                        Log.e(activity.javaClass.simpleName, "Error while updating profile", e)
+                        Toast.makeText(activity, "Error when updating profile", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
+
         fun loadUserData(activity: Activity) {
             mFireStore.collection(Constants.USERS).document(getCurrentUserID()).get()
                 .addOnSuccessListener { document ->
@@ -66,10 +85,11 @@ import utils.Constants
         }
         return currentUserID
     }
-
-
-
-
 }
+
+
+
+
+
 
 
